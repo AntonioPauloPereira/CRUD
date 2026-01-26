@@ -1,28 +1,31 @@
 import java.util.Scanner;
 import java.io.IOException;
 
-public class DadosBancarios {
+public class SuperMercado {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
         String[] nomes = new String[5];
-        String[] senhas = new String[5];
+        double[] preco = new double[5];
         
         int opcao_inicial = 0;
         
         do{
-            System.out.println("===== SUPER MERCADO ===== \n (1) - Registrar Produto \n (2) - Login \n (3) - Listar Produtos \n (0) - Sair \n");
+            System.out.println("===== SUPER MERCADO ===== \n (1) - Registrar Produto \n (2) - Listar Produtos \n (0) - Sair \n");
             System.out.print("Digite sua opcao: ");
             opcao_inicial = sc.nextInt();
             
             switch (opcao_inicial){
                 case 1:
-                nomes = CadastrarNome(nomes);
-                senhas = CadastrarSenha(senhas);
+                nomes = CadastrarProduto(nomes);
+                double[] cadPreco = CadastrarPreco(preco);
+                
                 break;
-                case 3:
-                ListarPerfis(nomes);
+                case 2:
+                ListarProduto(nomes, preco);
                 break;
+                default:
+                    System.out.println("Opcao invalida!");
             }
             
             
@@ -34,50 +37,39 @@ public class DadosBancarios {
         
     }
     
-    public static String[] CadastrarNome(String[] cad_nomes) {
+    public static String[] CadastrarProduto(String[] cad_nomes) {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < cad_nomes.length; i++) {
             if(cad_nomes[i] == null) {
-            System.out.print("Digite seu novo nome: ");
+            System.out.print("Digite o nome do produto: ");
             cad_nomes[i] = sc.nextLine();
                 break;
             }
         }
         return cad_nomes;
     }
-    public static String[] CadastrarSenha(String[] cad_senhas) {
+    public static double[] CadastrarPreco(double[] cad_preco) {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < cad_senhas.length; i++) {
-            if(cad_senhas[i] == null) {
-            System.out.print("Digite sua nova senha: ");
-            cad_senhas[i] = sc.nextLine();
+        for (int i = 0; i < cad_preco.length; i++) {
+            if(cad_preco[i] == 0) {
+            System.out.print("Digite o preco do produto: ");
+            cad_preco[i] = sc.nextDouble();
                 break;
             }
         }
-        return cad_senhas;
+        return cad_preco;
     }
-    public static void ListarPerfis(String[] nomes){
-        System.out.println("\n ===== PERFIS CADASTRADOS =====");
+    // Mexi nessa função para que liste o nome do produto e o  preço
+    public static void ListarProduto(String[] nomes, double[] precos){
+        System.out.println("\n ===== PRODUTOS CADASTRADOS =====");
         for(int i = 0; i < nomes.length; i++){
             if(nomes[i] != null) {
-                System.out.println(nomes[i]);
+                System.out.println("Nome: "+nomes[i]);
+                System.out.println("Preco: "+precos[i]);
+                System.out.println("-----");
             }
-            
         }
-      
-    }
-    public static boolean login(String[] senhas, String[] nomes){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite seu nome: ");
-        String log_nomes = sc.nextLine();
-        System.out.print("Digite sua senha: ");
-        String log_senhas = sc.nextLine();
         
-        for(int i = 0; i < nomes.length; i++) {
-            if(nomes[i].equals(log_nome))
-        }
-   
-    
-    
+      
     }
 } //<-- fim do código

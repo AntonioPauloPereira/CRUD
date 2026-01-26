@@ -11,7 +11,7 @@ public class DadosBancarios {
         int opcao_inicial = 0;
         
         do{
-            System.out.println("===== SUPER MERCADO ===== \n (1) - Cadastrar \n (2) - Login \n (3) - Listar perfis cadastrados \n (0) - Sair \n");
+            System.out.println("===== SUPER MERCADO ===== \n (1) - Registrar Produto \n (2) - Login \n (3) - Listar Produtos \n (0) - Sair \n");
             System.out.print("Digite sua opcao: ");
             opcao_inicial = sc.nextInt();
             

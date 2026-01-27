@@ -5,7 +5,12 @@
 //Delete (não feito)
 
 import java.util.Scanner;
-import java.io.IOException;
+import java.io.FileOutputStream; //Conecta o programa com sistemade arquivos para escrita bruta
+import java.io.ObjectOutputStream; // Envolve o fluxo de arquivos para gravação de obj (Serialização)
+import java.io.FileInputStream; // Abre o arquivo existente para leitura
+import java.io.ObjectInputStream; // Reconstrói o arquivo em bytes para leitura(Desserialização)
+import java.io.IOException; // Erro genérico de multiplas origens
+import java.io.FileNotFoundException; // O arquivo existe, mas classe do obj for alterada e removida
 
 //====================================Bloco mãe/ Menu ==================================================================
 public class SuperMercado {
@@ -14,7 +19,11 @@ public class SuperMercado {
         Scanner sc = new Scanner(System.in);
         String[] nomes = new String[10];     //
         double[] preco = new double[10];
-        
+
+          try{
+            nomes = (String []) Gravador.ler("nomes.dat");
+            preco = (double []) Gravador.ler("precos.dat");
+        } catch (Exception e){}
         int opcao_inicial = 0;
         
         do{

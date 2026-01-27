@@ -12,8 +12,8 @@ public class SuperMercado {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        String[] nomes = new String[999];     //
-        double[] preco = new double[999];
+        String[] nomes = new String[10];     //
+        double[] preco = new double[10];
         
         int opcao_inicial = 0;
         

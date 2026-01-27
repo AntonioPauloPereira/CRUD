@@ -65,7 +65,7 @@ public class SuperMercado {
         for(int i = 0; i < nomes.length; i++){
             if(nomes[i] != null) {
                 System.out.println("Nome: "+nomes[i]);
-                System.out.println("Preco: "+precos[i]);
+                System.out.println("Preco: "+precos[i]+" reais");
                 System.out.println("-----");
             }
         }

@@ -1,11 +1,18 @@
+//Projeto CRUD
+//Create (em andamento)
+//Read (não feito)
+//Update[edit the file] (não feito)
+//Delete (não feito)
+
 import java.util.Scanner;
 import java.io.IOException;
 
+//====================================Bloco mãe/ Menu ==================================================================
 public class SuperMercado {
     public static void main(String[] args) {
         
         Scanner sc = new Scanner(System.in);
-        String[] nomes = new String[5];
+        String[] nomes = new String[5];     //
         double[] preco = new double[5];
         
         int opcao_inicial = 0;
@@ -24,7 +31,7 @@ public class SuperMercado {
                 case 2:
                 ListarProduto(nomes, preco);
                 break;
-                default:
+                default: 
                     System.out.println("Opcao invalida!");
             }
             
@@ -36,7 +43,9 @@ public class SuperMercado {
         
         
     }
+    //======================================================-========================================================
     
+    //==================================  Cadastrar produtos ========================================================
     public static String[] CadastrarProduto(String[] cad_nomes) {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < cad_nomes.length; i++) {
@@ -48,6 +57,10 @@ public class SuperMercado {
         }
         return cad_nomes;
     }
+
+    //=================================================================================================================
+
+    //============================ Cadastar preços ========================================================================
     public static double[] CadastrarPreco(double[] cad_preco) {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i < cad_preco.length; i++) {
@@ -59,17 +72,16 @@ public class SuperMercado {
         }
         return cad_preco;
     }
-    // Mexi nessa função para que liste o nome do produto e o  preço
-    public static void ListarProduto(String[] nomes, double[] precos){
-        System.out.println("\n ===== PRODUTOS CADASTRADOS =====");
+    
+    //=========================== Listar =======================================================================================
+    public static void ListarProduto(String[] nomes, double[] precos){ 
+        System.out.println("\n ===== PRODUTOS CADASTRADOS ====="); 
         for(int i = 0; i < nomes.length; i++){
             if(nomes[i] != null) {
-                System.out.println("Nome: "+nomes[i]);
-                System.out.println("Preco: "+precos[i]+" reais");
-                System.out.println("-----");
-            }
+                System.out.println("Nome: "+nomes[i]+"   Preco: R$"+precos[i]);
+                           }
         }
-        
+    //================================================================================================================================    
       
     }
 } //<-- fim do código

@@ -74,13 +74,22 @@ public class SuperMercado {
     }
     
     //=========================== Listar =======================================================================================
-    public static void ListarProduto(String[] nomes, double[] precos){ 
-        System.out.println("\n ===== PRODUTOS CADASTRADOS ====="); 
+    public static void ListarProduto(String[] nomes, double[] precos){
+        Scanner sc = new Scanner(System.in);
+        int opcao;
+        do {
+        System.out.println("\n ===== PRODUTOS CADASTRADOS =====");
         for(int i = 0; i < nomes.length; i++){
             if(nomes[i] != null) {
-                System.out.println("Nome: "+nomes[i]+"   Preco: R$"+precos[i]);
-                           }
+                System.out.println("Nome: "+nomes[i]);
+                System.out.println("Preco: "+precos[i]+" reais");
+                System.out.println("-----");
+            }
         }
+        System.out.print("(0) para sair: ");
+        opcao = sc.nextInt();
+        
+    } while(opcao != 0);
     //================================================================================================================================    
       
     }

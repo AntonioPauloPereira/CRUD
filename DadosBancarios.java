@@ -35,11 +35,16 @@ public class SuperMercado {
                 case 1:
                 nomes = CadastrarProduto(nomes);
                 double[] cadPreco = CadastrarPreco(preco);
-                
                 break;
+                    
                 case 2:
                 ListarProduto(nomes, preco);
                 break;
+
+                case 0:
+                System.out.println("Saindo do sistema...");
+                break;
+                
                 default: 
                     System.out.println("Opcao invalida!");
             }

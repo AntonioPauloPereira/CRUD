@@ -2,7 +2,7 @@
 //Create (em andamento)
 //Read (não feito)
 //Update[edit the file] (não feito)
-//Delete (não feito)
+//Delete (feito!)
 
 import java.util.Scanner;
 import java.io.FileOutputStream; //Conecta o programa com sistemade arquivos para escrita bruta
@@ -27,7 +27,7 @@ public class SuperMercado {
         int opcao_inicial = 0;
         
         do{
-            System.out.println("===== SUPER MERCADO ===== \n (1) - Registrar Produto \n (2) - Listar Produtos \n (0) - Sair \n");
+            System.out.println("===== SUPER MERCADO ===== \n (1) - Registrar Produto \n (2) - Listar Produtos \n (3) - Excluir Produto \n (0) - Sair "); //Lua adicionou a opção "Ecluir produto" no menu.
             System.out.print("Digite sua opcao: ");
             opcao_inicial = sc.nextInt();
             
@@ -40,7 +40,11 @@ public class SuperMercado {
                 case 2:
                 ListarProduto(nomes, preco);
                 break;
-
+                
+                case 3://Lua adicionou esse case.
+                ExcluirProduto(nomes, preco);
+                break;
+                    
                 case 0:
                 System.out.println("Saindo do sistema...");
                 break;
@@ -53,8 +57,6 @@ public class SuperMercado {
             
             
         } while (opcao_inicial != 0);
-        
-        
         
     }
     //======================================================-========================================================
@@ -102,7 +104,27 @@ public class SuperMercado {
         opcao = sc.nextInt();
         
     } while(opcao != 0);
-    //================================================================================================================================    
-      
-    }
+    //=============================== Deletar Produtos ============================================================================================    
+}
+        public static void ExcluirProduto(String[] nomes, double[] preco){ //Lua criou essa função.
+        Scanner sc = new Scanner(System.in);
+        
+            System.out.println("Digite o nome do produto que deseja excluir: ");
+            String nomeBusca = sc.nextLine();
+            
+            boolean encontrou = false;
+            
+            for(int i = 0; i < nomes.length; i++){
+            if (nomes[i] != null && nomes[i].equalsIgnoreCase(nomeBusca)){//Primeiro verifica se a posição não esta vazia, depois comparamos o nome que está no índice [i].
+                    
+                    nomes[i] = null; //apaga o nome(Espaço volta a ser vazio).
+                    preco[i] = 0.0; //reseta o preço.
+                    encontrou = true;
+                    
+                    System.out.println("O Produto " + nomeBusca + " foi excluido.");
+                    break;
+                }
+            }
+        }
+    
 } //<-- fim do código

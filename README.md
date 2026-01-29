@@ -1,2 +1,2 @@
-# GRUD
+# CRUD
 Projeto escolar de java. 

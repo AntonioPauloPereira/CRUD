@@ -9,7 +9,6 @@ import java.io.IOException;
 public class SuperMercado {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         String[] nomes = new String[10];
         double[] preco = new double[10];
 
@@ -21,7 +20,14 @@ public class SuperMercado {
             System.out.println("Iniciando novo banco de dados...");
         }
 
-        int opcao_inicial = 0;
+        executarMenu(nomes, preco);
+    }
+
+    // ================================== FUNÇÃO DO MENU PRINCIPAL =================================================
+    
+    public static void executarMenu(String[] nomes, double[] preco) {
+        Scanner sc = new Scanner(System.in);
+        int opcao = 0;
 
         //Menu de interação 
         do {
@@ -32,65 +38,65 @@ public class SuperMercado {
             System.out.println("(4) - Excluir Produto");
             System.out.println("(0) - Sair ");
             System.out.print("Digite sua opcao: ");
-            opcao_inicial = sc.nextInt();
+            opcao = sc.nextInt();
 
-            switch (opcao_inicial) {
+            switch (opcao) {
                 case 1:
-                    nomes = CadastrarProduto(nomes);
-                    preco = CadastrarPreco(preco);
+                    nomes = cadastrarProduto(nomes);
+                    preco = cadastrarPreco(preco);
                     salvarDados(nomes, preco);
                     break;
                 case 2:
-                    ListarProduto(nomes, preco);
+                    listarProduto(nomes, preco);
                     break;
                 case 3:
-                    EditarProduto(nomes, preco);
+                    editarProduto(nomes, preco);
                     salvarDados(nomes, preco);
                     break;
                 case 4:
-                    ExcluirProduto(nomes, preco);
+                    excluirProduto(nomes, preco);
                     salvarDados(nomes, preco);
                     break;
                 case 0:
                     System.out.println("Saindo do sistema...");
                     break;
                 default:
-                    System.out.println("Opcao invalida!");
+                    System.out.println("Opção inválida!");
             }
-        } while (opcao_inicial != 0);
+        } while (opcao != 0);
     }
 
     // ================================== MÉTODOS DO SISTEMA ===========================================================
 
     // --- Cadastra produtos ---
-    public static String[] CadastrarProduto(String[] cad_nomes) {
+    public static String[] cadastrarProduto(String[] nomes) {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < cad_nomes.length; i++) {
-            if (cad_nomes[i] == null) {
+        for (int i = 0; i < nomes.length; i++) {
+            if (nomes[i] == null) {
                 System.out.print("Digite o nome do produto -> ");
-                cad_nomes[i] = sc.nextLine();
+                nomes[i] = sc.nextLine();
                 break;
             }
         }
-        return cad_nomes;
+        return nomes;
     }
 
     // --- Cadastra preços ---
-    public static double[] CadastrarPreco(double[] cad_preco) {
+    public static double[] cadastrarPreco(double[] precos) {
         Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < cad_preco.length; i++) {
-            if (cad_preco[i] == 0) {
-                System.out.print("Digite o preco do produto -> ");
-                cad_preco[i] = sc.nextDouble();
+        for (int i = 0; i < precos.length; i++) {
+            if (precos[i] == 0) {
+                System.out.print("Digite o preço do produto -> ");
+                precos[i] = sc.nextDouble();
                 sc.nextLine(); // Limpa o buffer
                 break;
             }
         }
-        return cad_preco;
+        return precos;
     }
-    
+
     // --- Faz a listagem dos produtos 
-    public static void ListarProduto(String[] nomes, double[] precos) {
+    public static void listarProduto(String[] nomes, double[] precos) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n ===== PRODUTOS CADASTRADOS =====");
         for (int i = 0; i < nomes.length; i++) {
@@ -99,73 +105,90 @@ public class SuperMercado {
             }
         }
         System.out.print("\n(0) para voltar ao menu: ");
-        sc.nextInt();
+        sc.nextLine(); 
     }
 
     // --- Remove produtos da lista --- 
-    public static void ExcluirProduto(String[] nomes, double[] preco) {
+    public static void excluirProduto(String[] nomes, double[] preco) {
         Scanner sc = new Scanner(System.in);
         System.out.println("\n--- EXCLUIR PRODUTO ---");
         System.out.println("1. Por Nome");
         System.out.println("2. Por ID");
-        System.out.println("3. Sair");
+        System.out.println("3. Excluir tudo");
+        System.out.println("4. Sair");
         System.out.print("Escolha -> ");
         int op = sc.nextInt();
         sc.nextLine(); // Limpa buffer
 
         switch (op) {
             case 1:
-                System.out.print("Digite o nome exato -> ");
-                String nomeBusca = sc.nextLine();
+                System.out.print("Digite o nome -> ");
+                String busca = sc.nextLine();
                 for (int i = 0; i < nomes.length; i++) {
-                    if (nomes[i] != null && nomes[i].equalsIgnoreCase(nomeBusca)) {
-                        nomes[i] = null;
-                        preco[i] = 0.0;
-                        System.out.println("Produto '" + nomeBusca + "' excluido.");
+                    if (nomes[i] != null && nomes[i].equalsIgnoreCase(busca)) {
+                        nomes[i] = null; preco[i] = 0.0;
+                        System.out.println("Produto removido.");
                         return;
                     }
                 }
-                System.out.println("Produto não encontrado.");
                 break;
-
             case 2:
-                System.out.print("Digite o ID -> ");
+                System.out.print("ID -> ");
                 int id = sc.nextInt();
-                if (id >= 0 && id < nomes.length && nomes[id] != null) {
-                    nomes[id] = null;
-                    preco[id] = 0.0;
-                    System.out.println("ID " + id + " excluido com sucesso.");
-                } else {
-                    System.out.println("ID inválido ou vazio.");
+                if (id >= 0 && id < nomes.length) {
+                    nomes[id] = null; preco[id] = 0.0;
+                    System.out.println("ID removido.");
                 }
                 break;
-
             case 3:
+                for (int i = 0; i < nomes.length; i++) {
+                    nomes[i] = null; preco[i] = 0.0;
+                }
+                System.out.println("Tudo excluído.");
+                break;
+            case 4:
                 return;
         }
     }
 
     // --- Edita os vetores de produtos e preços --- 
-    public static void EditarProduto(String nomes[], double precos[]) {
+    public static void editarProduto(String[] nomes, double[] precos) {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Digite o nome do produto para editar -> ");
-        String nomeBusca = sc.nextLine();
+        System.out.println("\n--- EDITAR PRODUTO ---");
+        System.out.println("1. Por Nome");
+        System.out.println("2. Por ID");
+        System.out.println("3. Sair");
+        System.out.print("Insira escolha -> ");
+        int op = sc.nextInt();
+        sc.nextLine();
 
-        for (int i = 0; i < nomes.length; i++) {
-            if (nomes[i] != null && nomes[i].equalsIgnoreCase(nomeBusca)) {
-                System.out.print("Novo nome (ou Enter para manter) -> ");
-                String novoNome = sc.nextLine();
-                if (!novoNome.isEmpty()) {
-                    nomes[i] = novoNome;
+        switch (op) {
+            case 1:
+                System.out.print("Nome do produto para editar -> ");
+                String busca = sc.nextLine();
+                for (int i = 0; i < nomes.length; i++) {
+                    if (nomes[i] != null && nomes[i].equalsIgnoreCase(busca)) {
+                        System.out.print("Novo nome -> ");
+                        nomes[i] = sc.nextLine();
+                        System.out.print("Novo preço -> ");
+                        precos[i] = sc.nextDouble();
+                        return;
+                    }
                 }
-
-                System.out.print("Novo preco -> ");
-                precos[i] = sc.nextDouble();
-                System.out.println("Produto atualizado com sucesso!");
+                break;
+            case 2:
+                System.out.print("ID -> ");
+                int id = sc.nextInt(); sc.nextLine();
+                if (id >= 0 && id < nomes.length && nomes[id] != null) {
+                    System.out.print("Novo nome -> ");
+                    nomes[id] = sc.nextLine();
+                    System.out.print("Novo preço -> ");
+                    precos[id] = sc.nextDouble();
+                }
+                break;
+            case 3:
                 return;
-            }
         }
-        System.out.println("Produto não encontrado.");
     }
 
     // -- Salva dados a partir Gravador --- 

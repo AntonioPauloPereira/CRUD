@@ -35,7 +35,8 @@ public class SuperMercado {
             System.out.println("(1) - Registrar Produto");
             System.out.println("(2) - Listar Produtos");
             System.out.println("(3) - Editar produto");
-            System.out.println("(4) - Excluir Produto");
+            System.out.println("(4) - Consultar Produto");
+            System.out.println("(5) - Excluir Produto");
             System.out.println("(0) - Sair ");
             System.out.print("Digite sua opcao: ");
             opcao = sc.nextInt();
@@ -54,6 +55,9 @@ public class SuperMercado {
                     salvarDados(nomes, preco);
                     break;
                 case 4:
+                    consultarProduto(nomes, preco);
+                    break;
+                case 5:
                     excluirProduto(nomes, preco);
                     salvarDados(nomes, preco);
                     break;
@@ -201,4 +205,48 @@ public class SuperMercado {
             System.out.println("Erro técnico ao salvar dados.");
         }
     }
+
+    // --- Consulta um produto específico por Nome ou ID --- 
+public static void consultarProduto(String[] nomes, double[] preco) {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("\n--- CONSULTAR PRODUTO ---");
+    System.out.println("1. Por Nome");
+    System.out.println("2. Por ID");
+    System.out.println("3. Voltar");
+    System.out.print("Escolha -> ");
+    int op = sc.nextInt();
+    sc.nextLine(); // Limpa buffer
+
+    switch (op) {
+        case 1:
+            System.out.print("Digite o nome para busca -> ");
+            String busca = sc.nextLine();
+            boolean encontradoNome = false;
+            for (int i = 0; i < nomes.length; i++) {
+                if (nomes[i] != null && nomes[i].equalsIgnoreCase(busca)) {
+                    System.out.println("\n[Produto Encontrado]");
+                    System.out.println("ID: " + i + " | Nome: " + nomes[i] + " | Preço: R$ " + preco[i]);
+                    encontradoNome = true;
+                }
+            }
+            if (!encontradoNome) System.out.println("Produto não encontrado.");
+            break;
+
+        case 2:
+            System.out.print("Digite o ID -> ");
+            int id = sc.nextInt();
+            if (id >= 0 && id < nomes.length && nomes[id] != null) {
+                System.out.println("\n[Produto Encontrado]");
+                System.out.println("ID: " + id + " | Nome: " + nomes[id] + " | Preço: R$ " + preco[id]);
+            } else {
+                System.out.println("ID inválido ou inexistente.");
+            }
+            break;
+
+        case 3:
+            return;
+    }
+}
+
+
 }
